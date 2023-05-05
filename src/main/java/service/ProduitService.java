@@ -30,12 +30,12 @@ public class ProduitService {
     add.executeUpdate();
     add.close();
   }
-  public void updateProduit(int newQte, Integer id, String newLibelle,String newCat) throws SQLException{
-    PreparedStatement add = conn.prepareStatement("UPDATE produit SET quantite=?,libelle=?,categorie=? WHERE id=?");
+  public void updateProduit(int newQte, String oldLib, String newLibelle,String newCat) throws SQLException{
+    PreparedStatement add = conn.prepareStatement("UPDATE produit SET quantite=?,libelle=?,categorie=? WHERE libelle=?");
     add.setInt(1, newQte);
     add.setString(2, newLibelle);
     add.setString(3, newCat);
-    add.setInt(4, id);
+    add.setString(4, oldLib);
     add.executeUpdate();
 
     add.close();

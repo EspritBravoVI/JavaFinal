@@ -1,0 +1,34 @@
+
+.button{
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+    -fx-background-color: #f0f0f0;
+    -fx-font-size: 26px;
+  
+    
+}
+.button:selected{
+    
+-fx-selection-color: #0a4128;
+-fx-background-color: #0a4128;
+
+
+}
+.button:hover{
+    
+     
+     -fx-background-color: derive(#0a4128,50%);
+     -fx-font-weight: bold;
+     -fx-text-fill: white;
+     
+     
+}
+
+
+.button:focused{
+     -fx-focus-color: darkgreen;
+     -fx-background-color: #0a4128;
+     -fx-text-fill: white;
+     -fx-font-weight: bold;
+     -fx-font-size: 28px;
+}
+

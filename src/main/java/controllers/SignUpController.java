@@ -30,12 +30,13 @@ import java.util.ResourceBundle;
 
 public class SignUpController  {
 
-    private UserService userService;
+    private UserService userService = new UserService();
     public static String username;
 
     Connection cnx;
     Blend b = new Blend();
     BoxBlur bb = new BoxBlur();
+    /*
     Image back = new Image(getClass().getResourceAsStream("../Ressources/images/back.png"));
     Image backfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backfliped.png"));
     Image backblur = new Image(getClass().getResourceAsStream("../Ressources/images/backblur.png"));
@@ -45,7 +46,7 @@ public class SignUpController  {
     Image backpanblur = new Image(getClass().getResourceAsStream("../Ressources/images/backpanblur.png"));
     Image backpanblurfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backpanblurfliped.png"));
     Image showpass = new Image(getClass().getResourceAsStream("../Ressources/images/showpass.png"));
-    Image hidepass = new Image(getClass().getResourceAsStream("../Ressources/images/hidepass.png"));
+    Image hidepass = new Image(getClass().getResourceAsStream("../Ressources/images/hidepass.png"));*/
     boolean status = false;
     @FXML
     private ImageView eye;
@@ -84,17 +85,23 @@ public class SignUpController  {
     private Button addAcount;
 
     @FXML
+    private Label errorlbl;
+
+    @FXML
+    private Label donelbl;
+
+    @FXML
     void ShowHidePassClicked(MouseEvent event) {
 
         if (!status) {
-            eye.setImage(hidepass);
+            //eye.setImage(hidepass);
             status = true;
             //hide pass
             passzone.setPromptText(passzone.getText());
             passzone.setText("");
             passzone.setDisable(true);
         } else {
-            eye.setImage(showpass);
+            //eye.setImage(showpass);
             status = false;
             //show pass
             passzone.setText(passzone.getPromptText());
@@ -110,7 +117,10 @@ public class SignUpController  {
             idzone11.setText("Fill up \nthe form !");
 
         } else if (!(p1.equals(p2))) {
-            idzone11.setText("Both passwords arent identical !");
+            //idzone11.setText("");
+            errorlbl.setText("Both passwords arent identical !");
+            passzone11.setStyle("-fx-border-color:red");
+            passzone1.setStyle("-fx-border-color:red");
         } else {
             try {
                 userService.addUser(idzone1.getText(),passzone1.getText());
@@ -118,14 +128,18 @@ public class SignUpController  {
                 idzone1.setText("");
                 passzone1.setText("");
                 passzone11.setText("");
-                idzone11.setText("Account created !");
+                passzone11.setStyle("-fx-border-color:black");
+                passzone1.setStyle("-fx-border-color:black");
+                errorlbl.setText("");
+                donelbl.setText("Account created Please close this window and login with your new credentials !");
 
 
 
             } catch (Exception ex) {
                 ex.printStackTrace();
-                idzone11.setText("Invalid data!");
+                errorlbl.setText("Username already taken !");
                 passzone11.setText("");
+                passzone1.setText("");
             }
 
         }

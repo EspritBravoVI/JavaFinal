@@ -13,9 +13,9 @@ public class UserService {
 
 
 
-  public boolean userLogin(String id, String password, String hiddenpass) throws SQLException {
+  public boolean userLogin(String username, String pass) throws SQLException {
     sst = conn.createStatement();
-    ResultSet rss=sst.executeQuery("select * from user where id = '" + id + "' and (pass ='" + password + "')");
+    ResultSet rss=sst.executeQuery("select * from user where username = '" + username + "' and (password ='" + pass + "')");
 
     if(rss.next()){
       rss.close();
@@ -57,8 +57,8 @@ public class UserService {
   public void addUser(String username, String password) throws SQLException{
 
     PreparedStatement add = conn.prepareStatement("INSERT INTO user VALUES(NULL,?,?)");
-    add.setString(1, username);
-    add.setString(2, password);
+    add.setString(1, password);
+    add.setString(2, username);
     add.executeUpdate();
     add.close();
   }

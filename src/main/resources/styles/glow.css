@@ -1,0 +1,11 @@
+.button:focused{
+     -fx-focus-color: darkgreen;
+}
+.button{
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+    
+}
+.button:selected{
+    
+-fx-selection-color: #0a4128;
+}

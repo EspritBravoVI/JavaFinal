@@ -5,12 +5,14 @@
 package controllers;
 
 
+import entite.PointDeVente;
 import entite.Produit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,10 +21,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import service.PointDeVenteService;
 import service.ProduitService;
 import service.UserService;
 import utils.ModelTableProduct;
+import utils.ModelTablePtVente;
 
 /**
  * FXML Controller class
@@ -30,10 +36,10 @@ import utils.ModelTableProduct;
  * @author Administrator
  */
 public class PointDeVenteController  {
-     boolean status = false;
-   
+    boolean status = false;
+
     private final ObservableList<String> catinfo = FXCollections.observableArrayList("médicament");
-    private final ObservableList<ModelTableProduct> oblist = FXCollections.observableArrayList();
+    private final ObservableList<ModelTablePtVente> oblist = FXCollections.observableArrayList();
     @FXML
     private Button connect;
     @FXML
@@ -50,8 +56,14 @@ public class PointDeVenteController  {
     private Label note;
     @FXML
     private Button btndelete;
+
+    @FXML
+    private Button btnEdit;
     @FXML
     private Label deleteerror;
+
+    @FXML
+    private Label editerror;
     @FXML
     private Label adderror;
     @FXML
@@ -60,19 +72,33 @@ public class PointDeVenteController  {
     private ComboBox<String> catcombo;
     @FXML
     private TextField idcat;
-    @FXML
-    private TextField designation;
-    @FXML
-    private TextField quantity;
-    @FXML
-    private TableColumn<ModelTableProduct, String> des;
-    @FXML
-    private TableView<ModelTableProduct> tab;
+
     @FXML
     private TableColumn<ModelTableProduct, String> cat;
     @FXML
+    private TextField idcatEdit;
+    @FXML
+    private TextField designation;
+
+    @FXML
+    private TextField category;
+    @FXML
+    private TextField quantity;
+    @FXML
+    private TableColumn<ModelTablePtVente, Integer> des;
+    @FXML
+    private TableView<ModelTablePtVente> tab;
+    @FXML
+    private TableColumn<ModelTablePtVente, Integer> ref;
+    @FXML
     private TextField iddes;
-    ProduitService produitService = new ProduitService();
+
+    @FXML
+    private TextField iddesEdit;
+
+    @FXML
+    private TextField idQteEdit;
+    PointDeVenteService pointDeVenteService = new PointDeVenteService();
     UserService userService = new UserService();
     @FXML
     private Label id;
@@ -81,12 +107,17 @@ public class PointDeVenteController  {
     @FXML
     private TableColumn<?, ?> Qte;
 
+    private String productName;
+
     @FXML
     void tabclick(MouseEvent event) {
         if (tab.getSelectionModel().getSelectedItem() != null) {
-            iddes.setText(tab.getSelectionModel().getSelectedItem().getDes());
-            idcat.setText(tab.getSelectionModel().getSelectedItem().getCatg());
+            iddes.setText(tab.getSelectionModel().getSelectedItem().getLoc());
             btndelete.setDisable(false);
+
+            iddesEdit.setText(tab.getSelectionModel().getSelectedItem().getLoc());
+            productName = tab.getSelectionModel().getSelectedItem().getLoc();
+            btnEdit.setDisable(false);
         }
     }
 
@@ -95,29 +126,28 @@ public class PointDeVenteController  {
 
         boolean test = true;
         //verifier s'il ya des champs vides
-        if ((designation.getText().isEmpty()) || (catcombo.getSelectionModel().getSelectedIndex() == -1)) {
+        if (designation.getText().isEmpty()) {
             adderror.setText("Données manquantes !");
-          // Mee  MenuLoaderController.player("src/Ressources/media/error.mp3");
+            // Mee  MenuLoaderController.player("src/Ressources/media/error.mp3");
             test = false;
         }
         if (test == true) {
             try {
 
                 // inserer les donnees saisies dans la table usertbl en utilisant l'interface PreparedStatement
-                produitService.addProduit(designation.getText(),Integer.parseInt(quantity.getText()), catcombo.getSelectionModel().getSelectedItem());
+                pointDeVenteService.addPointDeVente(designation.getText());
 
                 //afficher tous les elements de la base  + vider les champs + afficher un message
-                adderror.setText("Product Added ");
+                adderror.setText("Point de vente Added ");
 
-                catcombo.getSelectionModel().clearSelection();
+                //catcombo.getSelectionModel().clearSelection();
                 designation.setText("");
-                quantity.setText("");
                 deleteerror.setText("");
 
 
             } catch (Exception e) {
-                adderror.setText("2 Products cant have the same ID");
-
+                adderror.setText("2 Pt de vente can't have the same NAME");
+                System.out.println(e.getMessage());
             }
 
         }
@@ -146,12 +176,11 @@ public class PointDeVenteController  {
                     try {
                         // delete product
 
-                        produitService.deleteProduit(iddes.getText(), idcat.getText());
+                        pointDeVenteService.deletePt(iddes.getText());
 
-                        deleteerror.setText("Product deleted ! ");
+                        deleteerror.setText("Point de vente deleted ! ");
                         refresh();
                         iddes.setText("");
-                        idcat.setText("");
                         adderror.setText("");
 
                         btndelete.setDisable(true);
@@ -174,10 +203,58 @@ public class PointDeVenteController  {
 
     }
 
+    @FXML
+    void edit(MouseEvent event) {
+        boolean allow = true;
 
-   public void connect() {
+
+        if (allow == true) {
+            Stage stage = (Stage) superanch.getScene().getWindow();
+            Alert.AlertType type = Alert.AlertType.CONFIRMATION;
+            Alert alert = new Alert(type, "");
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.initOwner(stage);
+            alert.getDialogPane().setHeaderText("Tou are about to edit this product");
+            alert.getDialogPane().setContentText("Would you like to continue with this action ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            boolean test = false;
+            if (result.get() == ButtonType.OK) {
+                if (test == false)
+                    try {
+                        // delete product
+
+                        pointDeVenteService.updatePointDeVente(iddesEdit.getText(),productName);
+
+                        editerror.setText("Point de vente updated ! ");
+                        refresh();
+                        iddesEdit.setText("");
+                        productName = "";
+                        adderror.setText("");
+
+                        btnEdit.setDisable(true);
+
+                    } catch (Exception e) {
+                        editerror.setText("Error !");
+                        refresh();
+                        adderror.setText("");
+                    }
+            } else if (result.get() == ButtonType.CANCEL) {
+
+                refresh();
+                editerror.setText("Action Canceled!");
+                adderror.setText("");
+
+            }
+        }
+        refresh();
+
+
+    }
+
+
+    public void connect() {
         try {
-            boolean userExists = userService.userLogin(idzone.getText(), passzone.getPromptText(), passzone.getText());
+            boolean userExists = userService.userLogin(idzone.getText(), passzone.getText());
             if ((userExists && ((idzone.getText().equals("admin")) || (idzone.getText().equals("dev"))))) {
                 anchcnx.setVisible(false);
                 anchset.setVisible(true);
@@ -207,12 +284,31 @@ public class PointDeVenteController  {
     private void refresh() {//refresh tab
         try {
             tab.getItems().clear();
-            ArrayList<Produit> allProducts = produitService.getProducts();
-            for (Produit product: allProducts) {
-                ModelTableProduct tableList = new ModelTableProduct(product.getLibelle(), product.getCategorie(),product.getQuantite());
+            ArrayList<PointDeVente> allProducts = pointDeVenteService.getAllPointDeVente();
+            for (PointDeVente product: allProducts) {
+                ModelTablePtVente tableList = new ModelTablePtVente(product.getId(),product.getLocalisation());
                 oblist.add(tableList);
-
             }
+            System.out.println(oblist.get(0));
+            des.setCellValueFactory(new PropertyValueFactory<>("id"));
+            cat.setCellValueFactory(new PropertyValueFactory<>("loc"));
+            tab.setItems(oblist);
+        } catch (SQLException ex) {}
+    }
+
+    @FXML
+    private void showAll() {//refresh tab
+        try {
+            tab.getItems().clear();
+            ArrayList<PointDeVente> allProducts = pointDeVenteService.getAllPointDeVente();
+            for (PointDeVente product: allProducts) {
+                ModelTablePtVente tableList = new ModelTablePtVente(product.getId(),product.getLocalisation());
+                oblist.add(tableList);
+            }
+            System.out.println(oblist.get(0));
+            des.setCellValueFactory(new PropertyValueFactory<>("id"));
+            cat.setCellValueFactory(new PropertyValueFactory<>("loc"));
+            tab.setItems(oblist);
         } catch (SQLException ex) {}
     }
 }

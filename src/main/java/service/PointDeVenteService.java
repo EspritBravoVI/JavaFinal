@@ -26,10 +26,10 @@ public class PointDeVenteService {
     add.executeUpdate();
     add.close();
   }
-  public void updatePointDeVente(String newLocalisation,int id) throws SQLException{
-    PreparedStatement add = conn.prepareStatement("UPDATE point_de_vente SET localisation=?WHERE id=?");
+  public void updatePointDeVente(String newLocalisation, String oldLoc) throws SQLException{
+    PreparedStatement add = conn.prepareStatement("UPDATE point_de_vente SET localisation=? WHERE localisation=?");
     add.setString(1, newLocalisation);
-    add.setInt(2, id);
+    add.setString(2, oldLoc);
     add.executeUpdate();
 
     add.close();
@@ -67,6 +67,15 @@ public class PointDeVenteService {
     filtred = pointDeVenteList.stream().sorted(Comparator.comparing(PointDeVente::getLocalisation)).collect(Collectors.toList());
 
     return filtred;
+  }
+
+  public void deletePt(String des) throws SQLException{
+    PreparedStatement add = conn.prepareStatement("DELETE FROM point_de_vente WHERE localisation LIKE ?");
+
+    add.setString(1, des);
+    add.executeUpdate();
+
+    add.close();
   }
   public static void main(String[] args) throws SQLException {
     PointDeVenteService pointDeVenteService = new PointDeVenteService();

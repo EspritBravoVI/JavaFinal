@@ -1,27 +1,23 @@
 package entite;
 
 public class Fournisseur {
-    private Integer id ;
-    private Integer num ;
+    private String contact ;
     private String nom;
-    private String prenom;
     private String categorie ;
 
-    public Fournisseur(String nom, String prenom, Integer num, String categorie) {
+
+    public Fournisseur(String contact, String nom, String categorie) {
+        this.contact = contact;
         this.nom = nom;
-        this.prenom = prenom;
-        this.num = num;
         this.categorie = categorie;
     }
 
-
-
-    public Integer getId() {
-        return id;
+    public String getContact() {
+        return contact;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public String getNom() {
@@ -32,22 +28,6 @@ public class Fournisseur {
         this.nom = nom;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public Integer getNum() {
-        return num;
-    }
-
-    public void setNum(Integer num) {
-        this.num = num;
-    }
-
     public String getCategorie() {
         return categorie;
     }
@@ -55,18 +35,4 @@ public class Fournisseur {
     public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
-
-    @Override
-    public String toString() {
-        return "Fournisseur{" +
-                "id=" + id +
-                ", num='" + num + '\'' +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", Categorie='" + categorie + '\'' +
-                '}';
-    }
-
-
-
 }

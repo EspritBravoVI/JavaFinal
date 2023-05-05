@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="OurApp" />
         <module name="1INFOAL_JAVA2" />
+        <module name="JavaProject" />
       </profile>
     </annotationProcessing>
   </component>

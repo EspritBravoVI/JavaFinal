@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="superanch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1002.0" prefWidth="1328.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PointDeVenteController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1371.0" style="-fx-background-color: whitesmoke;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <effect>
+            <InnerShadow height="15.0" radius="7.0" width="15.0" />
+         </effect></AnchorPane>
+      <AnchorPane layoutX="24.0" layoutY="111.0" prefHeight="750.0" prefWidth="980.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="75.0">
+         <effect>
+            <DropShadow height="15.0" radius="7.0" width="15.0" />
+         </effect>
+         <children>
+            <Label layoutX="24.0" layoutY="6.0" prefHeight="77.0" prefWidth="950.0" text="Manage Point de vente" textFill="#1a8d4a" underline="true" wrapText="true" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="6.0">
+               <effect>
+                  <Glow level="0.1" />
+               </effect>
+               <font>
+                  <Font name="Segoe UI Bold" size="52.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="anchcnx" layoutX="14.0" layoutY="113.0" prefHeight="785.0" prefWidth="583.0" style="-fx-background-color: whitesmoke;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="685.0" AnchorPane.topAnchor="102.0">
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0" />
+               </effect>
+               <children>
+                  <TextField fx:id="idzone" layoutX="152.0" layoutY="199.0" prefHeight="55.0" prefWidth="280.0" promptText="Identifiant" stylesheets="@/styles/textfield.css">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField fx:id="passzone" layoutX="152.0" layoutY="365.0" onKeyPressed="#EnterKeyConnect" prefHeight="55.0" prefWidth="280.0" promptText="Mot de passe" stylesheets="@styles/textfield.css">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </PasswordField>
+                  <Button id="windows10" fx:id="connect" layoutX="194.0" layoutY="658.0" mnemonicParsing="false" onMouseClicked="#Seconnecter" prefHeight="64.0" prefWidth="196.0" stylesheets="@styles/glow.css" text="Connect" textFill="#0a4128" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="193.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Button>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="14.0" text="You need to reconnect in order to use this functionnality" textFill="#0a4128" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="id" layoutX="182.0" layoutY="152.0" prefHeight="24.0" prefWidth="220.0" text="User username">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="pw" layoutX="223.0" layoutY="311.0" prefHeight="24.0" prefWidth="137.0" text="User password">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="note" alignment="CENTER" layoutX="76.0" layoutY="511.0" prefHeight="64.0" prefWidth="433.0" textFill="RED" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anchset" prefHeight="648.0" prefWidth="458.0" style="-fx-background-color: whitesmoke;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="685.0" AnchorPane.topAnchor="102.0">
+               <effect>
+                  <DropShadow height="10.0" radius="4.5" width="10.0" />
+               </effect>
+               <children>
+                  <Label layoutX="117.0" layoutY="14.0" text="Add New Pt de vente" textFill="#27b573" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="50.0" layoutY="75.0" text="Localisation" textFill="#0a4128">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="designation" layoutX="44.0" layoutY="105.0" prefHeight="40.0" prefWidth="242.0" promptText="loc" stylesheets="@styles/textfield.css" AnchorPane.leftAnchor="44.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="adderror" alignment="CENTER" layoutX="15.0" layoutY="230.0" prefHeight="52.0" prefWidth="523.0" textFill="#0a4128" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="81.0" layoutY="565.0" text="Delete Pt de vente" textFill="#27b573">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="10.0" layoutY="544.0" prefHeight="8.0" prefWidth="441.0" style="-fx-background-color: #1a8d4a;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <effect>
+                        <Reflection />
+                     </effect>
+                  </Pane>
+                  <Label layoutX="50.0" layoutY="627.0" text="Localisation" textFill="#0a4128">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="iddes" editable="false" layoutX="42.0" layoutY="666.0" prefHeight="40.0" prefWidth="151.0" promptText="name" style="-fx-background-color: transparent; -fx-border-color: #0a4128;" text="loc" AnchorPane.leftAnchor="42.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="deleteerror" alignment="CENTER" layoutX="15.0" layoutY="719.0" prefHeight="52.0" prefWidth="402.0" textFill="#0a4128" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnadd" layoutX="477.0" layoutY="191.0" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="87.0" stylesheets="@styles/glow.css" text="Add" textFill="#0a4128">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btndelete" layoutX="457.0" layoutY="666.0" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="39.0" prefWidth="107.0" stylesheets="@styles/glow.css" text="Delete" textFill="#0a4128">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Pane layoutX="10.0" layoutY="278.0" prefHeight="8.0" prefWidth="553.0" style="-fx-background-color: #1a8d4a;">
+                     <effect>
+                        <Reflection />
+                     </effect>
+                  </Pane>
+                  <Label layoutX="117.0" layoutY="299.0" text="Edit Pt de vente" textFill="#27b573">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="50.0" layoutY="366.0" text="Localisation" textFill="#0a4128">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="iddesEdit" editable="true" layoutX="42.0" layoutY="404.0" prefHeight="40.0" prefWidth="151.0" promptText="loc" style="-fx-background-color: transparent; -fx-border-color: #0a4128;">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="btnEdit" layoutX="457.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#edit" prefHeight="39.0" prefWidth="107.0" stylesheets="@styles/glow.css" text="Edit" textFill="#0a4128">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Label fx:id="editerror" alignment="CENTER" layoutX="247.0" layoutY="472.0" prefHeight="52.0" prefWidth="310.0" textFill="#0a4128">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <TableView fx:id="tab" layoutX="614.0" layoutY="102.0" onMouseClicked="#tabclick" prefHeight="785.0" prefWidth="648.0" style="-fx-border-color: #1a8d4a;" stylesheets="@styles/tablestyle.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="16.0">
+               <columns>
+                  <TableColumn fx:id="des" prefWidth="250.0" text="Réference" />
+                  <TableColumn fx:id="cat" minWidth="0.0" prefWidth="396.0" text="Localisation" />
+               </columns>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#0a4128" height="10.0" radius="4.5" width="10.0" />
+               </effect>
+            </TableView>
+            <Button fx:id="btnshowall" layoutX="639.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#showAll" prefHeight="39.0" prefWidth="116.0" stylesheets="@styles/glow.css" text="Show All" textFill="#0a4128">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,20 @@
+.combo-box-base  
+{
+   
+    -fx-background-color: lightgray;
+    -fx-border-color: #0a4128 ;
+    -fx-background-radius: 0, 0, 0, 0;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 0;
+    -fx-accent: #0a4128 ;
+}
+.combo-box-popup .list-view .list-cell:filled:selected
+{
+   
+    -fx-background-color:derive(#0a4128,50%) ;
+
+}
+.combo-box-popup .list-view .list-cell:filled:hover {
+ -fx-background-color:derive(#0a4128,90%) ;   
+  
+}

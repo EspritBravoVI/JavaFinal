@@ -1,0 +1,6 @@
+.chart-bar{
+-fx-bar-fill: derive(#0a4128,50%);
+-fx-legend-side: right;
+}
+
+

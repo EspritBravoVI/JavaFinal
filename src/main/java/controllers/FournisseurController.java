@@ -5,12 +5,14 @@
 package controllers;
 
 
+import entite.Fournisseur;
 import entite.Produit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,10 +21,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
 import service.FournisseurService;
 import service.ProduitService;
 import service.UserService;
+import utils.ModelTableFournisseur;
 import utils.ModelTableProduct;
 
 /**
@@ -31,10 +36,10 @@ import utils.ModelTableProduct;
  * @author Administrator
  */
 public class FournisseurController  {
-     boolean status = false;
-   
+    boolean status = false;
+
     private final ObservableList<String> catinfo = FXCollections.observableArrayList("médicament");
-    private final ObservableList<ModelTableProduct> oblist = FXCollections.observableArrayList();
+    private final ObservableList<ModelTableFournisseur> oblist = FXCollections.observableArrayList();
     @FXML
     private Button connect;
     @FXML
@@ -51,8 +56,14 @@ public class FournisseurController  {
     private Label note;
     @FXML
     private Button btndelete;
+
+    @FXML
+    private Button btnEdit;
     @FXML
     private Label deleteerror;
+
+    @FXML
+    private Label editerror;
     @FXML
     private Label adderror;
     @FXML
@@ -61,20 +72,31 @@ public class FournisseurController  {
     private ComboBox<String> catcombo;
     @FXML
     private TextField idcat;
+
+    @FXML
+    private TextField idcatEdit;
     @FXML
     private TextField designation;
+
+    @FXML
+    private TextField category;
     @FXML
     private TextField quantity;
     @FXML
-    private TableColumn<ModelTableProduct, String> des;
+    private TableColumn<ModelTableFournisseur, String> des;
     @FXML
-    private TableView<ModelTableProduct> tab;
+    private TableView<ModelTableFournisseur> tab;
     @FXML
-    private TableColumn<ModelTableProduct, String> cat;
+    private TableColumn<ModelTableFournisseur, String> cat;
     @FXML
     private TextField iddes;
+
+    @FXML
+    private TextField iddesEdit;
+
+    @FXML
+    private TextField idQteEdit;
     ProduitService produitService = new ProduitService();
-    FournisseurService fournisseurService = new FournisseurService() ;
     UserService userService = new UserService();
     @FXML
     private Label id;
@@ -83,12 +105,21 @@ public class FournisseurController  {
     @FXML
     private TableColumn<?, ?> Qte;
 
+    private String productName;
+
+    FournisseurService fournisseurService = new FournisseurService();
+
     @FXML
     void tabclick(MouseEvent event) {
         if (tab.getSelectionModel().getSelectedItem() != null) {
-            iddes.setText(tab.getSelectionModel().getSelectedItem().getDes());
-            idcat.setText(tab.getSelectionModel().getSelectedItem().getCatg());
+            iddes.setText(tab.getSelectionModel().getSelectedItem().getNom());
             btndelete.setDisable(false);
+
+            iddesEdit.setText(tab.getSelectionModel().getSelectedItem().getNom());
+            idcatEdit.setText(tab.getSelectionModel().getSelectedItem().getCat());
+            idQteEdit.setText(tab.getSelectionModel().getSelectedItem().getContact());
+            productName = tab.getSelectionModel().getSelectedItem().getNom();
+            btnEdit.setDisable(false);
         }
     }
 
@@ -97,29 +128,31 @@ public class FournisseurController  {
 
         boolean test = true;
         //verifier s'il ya des champs vides
-        if ((designation.getText().isEmpty()) || (catcombo.getSelectionModel().getSelectedIndex() == -1)) {
+        if ((designation.getText().isEmpty()) || ((quantity.getText().isEmpty()))) {
             adderror.setText("Données manquantes !");
-          // Mee  MenuLoaderController.player("src/Ressources/media/error.mp3");
+            // Mee  MenuLoaderController.player("src/Ressources/media/error.mp3");
             test = false;
         }
         if (test == true) {
             try {
 
                 // inserer les donnees saisies dans la table usertbl en utilisant l'interface PreparedStatement
-                fournisseurService.addFournisseur(designation.getText(),Integer.parseInt(quantity.getText()), catcombo.getSelectionModel().getSelectedItem());
-                
-                //afficher tous les elements de la base  + vider les champs + afficher un message
-                adderror.setText("Product Added ");
 
-                catcombo.getSelectionModel().clearSelection();
+                fournisseurService.addFournisseur(designation.getText(),category.getText(),quantity.getText());
+
+                //afficher tous les elements de la base  + vider les champs + afficher un message
+                adderror.setText("Fournisseur Added ");
+
+                //catcombo.getSelectionModel().clearSelection();
                 designation.setText("");
                 quantity.setText("");
+                category.setText("");
                 deleteerror.setText("");
 
 
             } catch (Exception e) {
-                adderror.setText("2 Products cant have the same ID");
-
+                adderror.setText("2 Fournisseur cant have the same NAME");
+                System.out.println(e.getMessage());
             }
 
         }
@@ -139,7 +172,7 @@ public class FournisseurController  {
             Alert alert = new Alert(type, "");
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.initOwner(stage);
-            alert.getDialogPane().setHeaderText("This Action is irreversable !!!");
+            alert.getDialogPane().setHeaderText("This Action is irreversable !");
             alert.getDialogPane().setContentText("Would you like to continue with this action ?");
             Optional<ButtonType> result = alert.showAndWait();
             boolean test = false;
@@ -148,12 +181,12 @@ public class FournisseurController  {
                     try {
                         // delete product
 
-                        produitService.deleteProduit(iddes.getText(), idcat.getText());
-                        fournisseurService.deleteFournisseur
+
+                        fournisseurService.deleteSupplier(iddes.getText());
+
                         deleteerror.setText("Fournisseur deleted ! ");
                         refresh();
                         iddes.setText("");
-                        idcat.setText("");
                         adderror.setText("");
 
                         btndelete.setDisable(true);
@@ -176,10 +209,61 @@ public class FournisseurController  {
 
     }
 
+    @FXML
+    void edit(MouseEvent event) {
+        boolean allow = true;
 
-   public void connect() {
+
+        if (allow == true) {
+            Stage stage = (Stage) superanch.getScene().getWindow();
+            Alert.AlertType type = Alert.AlertType.CONFIRMATION;
+            Alert alert = new Alert(type, "");
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.initOwner(stage);
+            alert.getDialogPane().setHeaderText("Tou are about to edit this product");
+            alert.getDialogPane().setContentText("Would you like to continue with this action ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            boolean test = false;
+            if (result.get() == ButtonType.OK) {
+                if (test == false)
+                    try {
+                        // delete product
+
+
+                        fournisseurService.updateFournisseur(iddesEdit.getText(),productName,idcatEdit.getText(),idQteEdit.getText());
+
+                        editerror.setText("Fournisseur updated ! ");
+                        refresh();
+                        iddesEdit.setText("");
+                        idcatEdit.setText("");
+                        idQteEdit.setText("");
+                        productName = "";
+                        adderror.setText("");
+
+                        btnEdit.setDisable(true);
+
+                    } catch (Exception e) {
+                        editerror.setText("Error !");
+                        refresh();
+                        adderror.setText("");
+                    }
+            } else if (result.get() == ButtonType.CANCEL) {
+
+                refresh();
+                editerror.setText("Action Canceled!");
+                adderror.setText("");
+
+            }
+        }
+        refresh();
+
+
+    }
+
+
+    public void connect() {
         try {
-            boolean userExists = userService.userLogin(idzone.getText(), passzone.getPromptText(), passzone.getText());
+            boolean userExists = userService.userLogin(idzone.getText(), passzone.getText());
             if ((userExists && ((idzone.getText().equals("admin")) || (idzone.getText().equals("dev"))))) {
                 anchcnx.setVisible(false);
                 anchset.setVisible(true);
@@ -209,12 +293,33 @@ public class FournisseurController  {
     private void refresh() {//refresh tab
         try {
             tab.getItems().clear();
-            ArrayList<Produit> allProducts = produitService.getProducts();
-            for (Produit product: allProducts) {
-                ModelTableProduct tableList = new ModelTableProduct(product.getLibelle(), product.getCategorie(),product.getQuantite());
+            ArrayList<Fournisseur> allProducts = fournisseurService.getAllFournisseur();
+            for (Fournisseur product: allProducts) {
+                ModelTableFournisseur tableList = new ModelTableFournisseur(product.getNom(), product.getCategorie(),product.getContact());
                 oblist.add(tableList);
-
             }
+            System.out.println(oblist.get(0));
+            des.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            cat.setCellValueFactory(new PropertyValueFactory<>("cat"));
+            Qte.setCellValueFactory(new PropertyValueFactory<>("contact"));
+            tab.setItems(oblist);
+        } catch (SQLException ex) {}
+    }
+
+    @FXML
+    private void showAll() {//refresh tab
+        try {
+            tab.getItems().clear();
+            ArrayList<Fournisseur> allProducts = fournisseurService.getAllFournisseur();
+            for (Fournisseur product: allProducts) {
+                ModelTableFournisseur tableList = new ModelTableFournisseur(product.getNom(), product.getCategorie(),product.getContact());
+                oblist.add(tableList);
+            }
+            System.out.println(oblist.get(0));
+            des.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            cat.setCellValueFactory(new PropertyValueFactory<>("cat"));
+            Qte.setCellValueFactory(new PropertyValueFactory<>("contact"));
+            tab.setItems(oblist);
         } catch (SQLException ex) {}
     }
 }

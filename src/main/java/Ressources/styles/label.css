@@ -1,0 +1,31 @@
+.label {
+    -fx-font-size: 30px;
+    -fx-font-weight: regular;
+    -fx-text-fill: #0a4128;
+    
+}
+.label:selected{
+    
+-fx-selection-color: #0a4128;
+-fx-background-color: #0a4128;
+
+
+}
+.label:hover{
+    
+     
+     
+     -fx-font-weight: bold;
+     -fx-text-fill: white;
+     
+     
+}
+
+
+.label:focused{
+    
+     -fx-text-fill: white;
+     -fx-font-weight: bold;
+     -fx-underline: true;
+     -fx-font-size: 32px;
+}

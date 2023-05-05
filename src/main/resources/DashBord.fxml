@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1850.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/20.0.1-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashBordController">
+   <children>
+      <AnchorPane layoutX="45.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="89.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" layoutX="86.0" layoutY="44.0" prefHeight="77.0" prefWidth="562.0" text="Tableau de bord " textFill="#1a8d4a" AnchorPane.topAnchor="44.0">
+               <font>
+                  <Font name="Segoe UI Bold" size="64.0" />
+               </font>
+               <effect>
+                  <Glow level="0.1" />
+               </effect>
+            </Label>
+            <AnchorPane fx:id="anch" layoutX="411.0" layoutY="347.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-border-color: white; -fx-border-width: 3; -fx-background-color: white;" AnchorPane.leftAnchor="411.0" AnchorPane.topAnchor="347.0">
+               <children>
+                  <Label fx:id="nb10" alignment="CENTER" layoutX="72.0" layoutY="91.0" prefHeight="42.0" prefWidth="113.0" text="0" textFill="#79807d" AnchorPane.topAnchor="90.0">
+                     <font>
+                        <Font name="System Bold" size="46.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="62.0" layoutY="155.0" prefHeight="42.0" prefWidth="102.0" text="Totale Produit" textFill="#79807d" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="24.0" layoutY="171.0" prefHeight="5.0" prefWidth="220.0" style="-fx-background-color: #0a4128;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <effect>
+                        <Reflection />
+                     </effect>
+                  </Pane>
+               </children>
+               <effect>
+                  <DropShadow color="#0a4128" height="15.0" radius="7.0" width="15.0" />
+               </effect>
+            </AnchorPane>
+            <AnchorPane fx:id="anch1" layoutX="86.0" layoutY="347.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-border-color: white; -fx-border-width: 3; -fx-background-color: white;" AnchorPane.leftAnchor="86.0" AnchorPane.topAnchor="347.0">
+               <children>
+                  <Label fx:id="nb11" alignment="CENTER" layoutX="72.0" layoutY="97.0" prefHeight="40.0" prefWidth="113.0" text="0" textFill="#79807d" AnchorPane.topAnchor="90.0">
+                     <font>
+                        <Font name="System Bold" size="46.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="6.0" layoutY="185.0" prefHeight="42.0" prefWidth="102.0" text="Stock" textFill="#79807d" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="24.0" layoutY="171.0" prefHeight="5.0" prefWidth="220.0" style="-fx-background-color: #0a4128;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <effect>
+                        <Reflection />
+                     </effect>
+                  </Pane>
+               </children>
+               <effect>
+                  <DropShadow color="#0a4128" height="15.0" radius="7.0" width="15.0" />
+               </effect>
+            </AnchorPane>
+            <AnchorPane fx:id="anch2" layoutX="736.0" layoutY="345.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-border-color: white; -fx-border-width: 3; -fx-background-color: white;" AnchorPane.leftAnchor="736.0" AnchorPane.topAnchor="345.0">
+               <children>
+                  <Label fx:id="nb12" alignment="CENTER" layoutX="72.0" layoutY="91.0" prefHeight="42.0" prefWidth="113.0" text="0" textFill="#79807d" AnchorPane.topAnchor="90.0">
+                     <font>
+                        <Font name="System Bold" size="46.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="62.0" layoutY="155.0" prefHeight="42.0" prefWidth="102.0" text="hors stock" textFill="#79807d" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="24.0" layoutY="171.0" prefHeight="5.0" prefWidth="220.0" style="-fx-background-color: #0a4128;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <effect>
+                        <Reflection />
+                     </effect>
+                  </Pane>
+               </children>
+               <effect>
+                  <DropShadow color="#0a4128" height="15.0" radius="7.0" width="15.0" />
+               </effect>
+            </AnchorPane>
+            <!-- <AnchorPane fx:id="anch3" layoutX="1062.0" layoutY="345.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-border-color: white; -fx-border-width: 3; -fx-background-color: white;" AnchorPane.rightAnchor="449.0" AnchorPane.topAnchor="345.0">
+               <children>
+                  <Label fx:id="nb13" alignment="CENTER" layoutX="72.0" layoutY="91.0" prefHeight="42.0" prefWidth="113.0" text="0" textFill="#79807d" AnchorPane.topAnchor="90.0">
+                     <font>
+                        <Font name="System Bold" size="46.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="62.0" layoutY="155.0" prefHeight="42.0" prefWidth="102.0" text="xxxxx" textFill="#79807d" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="24.0" layoutY="171.0" prefHeight="5.0" prefWidth="220.0" style="-fx-background-color: #0a4128;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <effect>
+                        <Reflection />
+                     </effect>
+                  </Pane>
+               </children>
+               <effect>
+                  <DropShadow color="#0a4128" height="15.0" radius="7.0" width="15.0" />
+               </effect>
+            </AnchorPane> -->
+            <Pane layoutX="110.0" layoutY="118.0" prefHeight="5.0" prefWidth="515.0" style="-fx-background-color: #1a8d4a;">
+               <effect>
+                  <Reflection />
+               </effect>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

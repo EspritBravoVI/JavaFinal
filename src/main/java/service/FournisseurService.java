@@ -27,11 +27,12 @@ public class FournisseurService {
     add.executeUpdate();
     add.close();
   }
-  public void updateFournisseur(int id, String categorieProduit, String contact) throws SQLException{
-    PreparedStatement add = conn.prepareStatement("UPDATE fournisseur SET categorie_produit=? , contact=? WHERE id=?");
-    add.setString(1, categorieProduit);
-    add.setString(2, contact);
-    add.setInt(3, id);
+  public void updateFournisseur(String newNom , String oldName , String categorieProduit, String contact) throws SQLException{
+    PreparedStatement add = conn.prepareStatement("UPDATE fournisseur SET nom=? , categorie_produit=? , contact=? WHERE nom=?");
+    add.setString(1, newNom);
+    add.setString(2, categorieProduit);
+    add.setString(3, contact);
+    add.setString(4, oldName);
     add.executeUpdate();
 
     add.close();
@@ -43,7 +44,7 @@ public class FournisseurService {
     ArrayList<Fournisseur> fournisseurList = new ArrayList<>();
 
     while (rs.next()) {
-      Fournisseur fournisseur = new Fournisseur(rs.getString("nom"),rs.getString("prenom"),rs.getInt("num"),rs.getString("categorie_produit"));
+      Fournisseur fournisseur = new Fournisseur(rs.getString("contact"),rs.getString("nom"),rs.getString("categorie_produit"));
       fournisseurList.add(fournisseur);
     }
     rs.close();
@@ -59,7 +60,8 @@ public class FournisseurService {
     ArrayList<Fournisseur> fournisseurList = new ArrayList<>();
 
     while (rs.next()) {
-      Fournisseur fournisseur = new Fournisseur(rs.getString("nom"),rs.getString("prenom"),rs.getInt("num"),rs.getString("categorie_produit"));
+      Fournisseur fournisseur = new Fournisseur(rs.getString("contact"),rs.getString("nom"),rs.getString("categorie_produit"));
+
       fournisseurList.add(fournisseur);
     }
     rs.close();
@@ -78,7 +80,8 @@ public class FournisseurService {
     ArrayList<Fournisseur> fournisseurList = new ArrayList<>();
 
     while (rs.next()) {
-      Fournisseur fournisseur = new Fournisseur(rs.getString("nom"),rs.getString("prenom"),rs.getInt("num"),rs.getString("categorie_produit"));
+      Fournisseur fournisseur = new Fournisseur(rs.getString("contact"),rs.getString("nom"),rs.getString("categorie_produit"));
+
       fournisseurList.add(fournisseur);
     }
     rs.close();
@@ -88,6 +91,15 @@ public class FournisseurService {
     filtred = fournisseurList.stream().sorted(Comparator.comparing(Fournisseur::getNom)).collect(Collectors.toList());
 
     return filtred;
+  }
+
+  public void deleteSupplier(String des) throws SQLException{
+    PreparedStatement add = conn.prepareStatement("DELETE FROM fournisseur WHERE nom LIKE ?");
+
+    add.setString(1, des);
+    add.executeUpdate();
+
+    add.close();
   }
 
   public static void main(String[] args) throws SQLException {

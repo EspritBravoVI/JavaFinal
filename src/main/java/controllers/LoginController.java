@@ -27,6 +27,7 @@ import javafx.util.Duration;
 //import tray.notification.NotificationType;
 //import tray.notification.TrayNotification;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ResourceBundle;
@@ -36,20 +37,20 @@ public class LoginController implements Initializable {
 
     private UserService userService;
     public static String username;
-
     Connection cnx;
     Blend b = new Blend();
     BoxBlur bb = new BoxBlur();
-    Image back = new Image(getClass().getResourceAsStream("../Ressources/images/back.png"));
-    Image backfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backfliped.png"));
-    Image backblur = new Image(getClass().getResourceAsStream("../Ressources/images/backblur.png"));
-    Image backblurfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backblurfliped.png"));
-    Image backpan = new Image(getClass().getResourceAsStream("../Ressources/images/backpan.png"));
-    Image backpanfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backpanfliped.png"));
-    Image backpanblur = new Image(getClass().getResourceAsStream("../Ressources/images/backpanblur.png"));
-    Image backpanblurfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backpanblurfliped.png"));
-    Image showpass = new Image(getClass().getResourceAsStream("../Ressources/images/showpass.png"));
-    Image hidepass = new Image(getClass().getResourceAsStream("../Ressources/images/hidepass.png"));
+/*
+        Image back = new Image(getClass().getResourceAsStream("back.png"));
+        Image backfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backfliped.png"));
+        Image backblur = new Image(getClass().getResourceAsStream("../Ressources/images/backblur.png"));
+        Image backblurfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backblurfliped.png"));
+        Image backpan = new Image(getClass().getResourceAsStream("../Ressources/images/backpan.png"));
+        Image backpanfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backpanfliped.png"));
+        Image backpanblur = new Image(getClass().getResourceAsStream("../Ressources/images/backpanblur.png"));
+        Image backpanblurfliped = new Image(getClass().getResourceAsStream("../Ressources/images/backpanblurfliped.png"));
+        Image showpass = new Image(getClass().getResourceAsStream("../Ressources/images/showpass.png"));
+        Image hidepass = new Image(getClass().getResourceAsStream("../Ressources/images/hidepass.png"));*/
     boolean status = false;
     @FXML
     private ImageView eye;
@@ -119,14 +120,14 @@ public class LoginController implements Initializable {
     void ShowHidePassClicked(MouseEvent event) {
 
         if (!status) {
-            eye.setImage(hidepass);
+            //eye.setImage(hidepass);
             status = true;
             //hide pass
             passzone.setPromptText(passzone.getText());
             passzone.setText("");
             passzone.setDisable(true);
         } else {
-            eye.setImage(showpass);
+            //eye.setImage(showpass);
             status = false;
             //show pass
             passzone.setText(passzone.getPromptText());
@@ -140,32 +141,33 @@ public class LoginController implements Initializable {
         this.userService = new UserService();
 
         anchlog.setVisible(true);
-        anchlog1.setVisible(false);
-        eye.setImage(showpass);
-        eye1.setImage(showpass);
+        //anchlog1.setVisible(false);
+        /*eye.setImage(showpass);
+        eye1.setImage(showpass); */
            }
 
     public void connect() {
         try {
 
 
-            if (userService.userLogin(idzone.getText(),passzone.getPromptText(), passzone.getText())) {
+            if (userService.userLogin(idzone.getText(), passzone.getText())) {
                 username = idzone.getText();
+                System.out.println(username);
 
                 //open munulaoder
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/MenuLoader.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/MenuLoader.fxml"));
                 Parent root = loader.load();
 
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
-                stage.initStyle(StageStyle.TRANSPARENT);
+                //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
-                scene.setFill(Color.TRANSPARENT);
+                //scene.setFill(Color.TRANSPARENT);
                 stage.show();
-                javafx.geometry.Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+                /* javafx.geometry.Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
                 stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-                stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+                stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2); */
 
                 loginanc.getChildren().clear();
                 loginanc.getScene().getWindow().hide();
@@ -187,14 +189,26 @@ public class LoginController implements Initializable {
 
     }
 
-   /*
+
     @FXML
-    private void signUp(MouseEvent event) {
-     anchlog.setVisible(false);
-        anchlog1.setVisible(true);
-        eye1.setImage(showpass);
+    private void signUp(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/signup.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Stage stage = new Stage();
+
+
+        Scene scene = new Scene(root, 320, 240);
+        stage.setTitle("Create an account");
+        stage.setScene(scene);
+        stage.show();
     }
-*/
+
     @FXML
     private void addAcount(MouseEvent event) {
         String p1 = passzone1.getText();

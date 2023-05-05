@@ -1,0 +1,108 @@
+.table-view .column-header
+{
+      -fx-background-color: derive(transparent,90%);
+    -fx-stroke: transparent;
+    -fx-size:50;
+    -fx-alignment: CENTER ;    
+    -fx-text-alignment: center;
+    -fx-font-size: 18px;
+    
+}
+
+
+
+.table-row-cell:filled:hover {
+    -fx-background-color: derive(#0a4128,100%);
+   
+
+}
+
+.table-row-cell:selected { 
+    -fx-text-fill: white;
+    -fx-background-color: derive(#0a4128,33%);
+    -fx-font-weight: bold;
+   
+}
+.table-row-cell:selected:hover { 
+    -fx-text-fill: white;
+    -fx-background-color: derive(#0a4128,33%);
+    -fx-font-weight: bold;
+   
+}
+.table-view:row-selection {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-fixed-cell-size: 40;
+   
+}
+
+.table-view .table-column{
+    -fx-font-size: 14px;
+      -fx-alignment: CENTER ;    
+    -fx-text-alignment: center;
+   
+
+}    
+.corner {
+    -fx-background-color: lightgray;
+}
+
+
+/* The main scrollbar CSS class of ListView */
+.table-view .scroll-bar:horizontal ,
+.table-view  .scroll-bar:vertical{
+    -fx-background-color:transparent;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button ,.table-view .decrement-button {
+    -fx-background-color:transparent;
+	-fx-border-color:derive(gray,80%);
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track ,
+.table-view .scroll-bar:vertical .track{
+     -fx-background-color: transparent;
+	 -fx-border-color:derive(gray,80%);
+	 -fx-background-radius: 0em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color:derive(#0a4128,90%);
+	-fx-background-insets: 0, 0, 0;
+	-fx-background-radius: 0em;
+
+}
+
+/* ------------------------------------------------------------------------------------- */
+/** EVENT CSS **/
+/* ------------------------------------------------------------------------------------- */
+
+/* The main scrollbar **track** CSS class on event of "hover" and "pressed" */
+
+.table-view .scroll-bar:horizontal:hover .track ,
+.table-view .scroll-bar:horizontal:pressed .track ,
+.table-view .scroll-bar:vertical:hover .track,
+.table-view .scroll-bar:vertical:pressed .track{
+     -fx-background-color: derive(#434343,20%);
+
+	 -fx-opacity: 0.2;
+	 -fx-background-radius: 0em;
+
+}
+
+/* The main scrollbar **thumb** CSS class on event of "hover" and "pressed" */
+.table-view .scroll-bar .thumb:hover,
+.table-view .scroll-bar .thumb:pressed{
+    -fx-background-color: derive(#0a4128,50%);
+}
+
+.table-view .increment-button:hover ,.table-view .decrement-button:hover {
+    -fx-background-color:derive(gray,100%);
+	-fx-border-color:derive(gray,80%);	
+	
+}

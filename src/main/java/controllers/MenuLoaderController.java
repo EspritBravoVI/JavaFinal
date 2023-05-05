@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers;
+package controllers;
 
 import utils.DataSource;
 import javafx.animation.Animation;
@@ -53,9 +53,10 @@ import java.util.logging.Logger;
  * @author Administrator
  */
 public class MenuLoaderController implements Initializable {
+    /*
     Image haveNot = new Image(getClass().getResourceAsStream("../Ressources/images/notificationred.png"));
     Image donthaveNot = new Image(getClass().getResourceAsStream("../Ressources/images/notification.png"));
-    Image traynot = new Image(getClass().getResourceAsStream("../Ressources/images/notificationg.png"));
+    Image traynot = new Image(getClass().getResourceAsStream("../Ressources/images/notificationg.png"));*/
     boolean test = false;
     Blend b = new Blend();
     InnerShadow sh = new InnerShadow();
@@ -123,7 +124,7 @@ public class MenuLoaderController implements Initializable {
         mediaplayer.play();
     }
 
-    public void openPage(String path) throws IOException {
+    /*public void openPage(String path) throws IOException {
         Platform.runLater(() -> mainpan.getChildren().clear());
         Platform.runLater(() -> {
                     fileurl = PreLoader.class.getResource(path);
@@ -137,7 +138,7 @@ public class MenuLoaderController implements Initializable {
                 }
         );
 
-    }
+    }*/
     
     @FXML
     void openProduct(MouseEvent event) throws IOException {
@@ -151,7 +152,25 @@ public class MenuLoaderController implements Initializable {
         notselected(anchdash, ldash, pdash, "Tableau de bord");
         notselected(anchmed, lmed, pmed, "Fournisseurs");
         notselected(anchset, lset, pset, "Point de ventes");
-        openPage("../GUI/ProductUI.fxml");
+        //openPage("../GUI/ProductUI.fxml");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProductUI.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+
+
+        Scene scene = new Scene(root, 320, 240);
+        stage.setTitle("Manage Products");
+        stage.setScene(scene);
+        stage.show();
+
+                /*Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();*/
+
+        //mainanch.getChildren().clear();
+        //mainanch.getScene().getWindow().hide();
 
 
     }
@@ -169,7 +188,18 @@ public class MenuLoaderController implements Initializable {
         notselected(anchnot, lnot, pnot, "Produits");
         notselected(anchdash, ldash, pdash, "Tableau de bord");
         notselected(anchset, lset, pset, "Point de ventes");
-        openPage("../GUI/Fournisseur.fxml");
+        //openPage("../GUI/Fournisseur.fxml");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fournisseur.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+
+
+        Scene scene = new Scene(root, 320, 240);
+        stage.setTitle("Manage Fournisseur");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -185,7 +215,18 @@ public class MenuLoaderController implements Initializable {
         notselected(anchnot, lnot, pnot, "Produits");
         notselected(anchdash, ldash, pdash, "Tableau de bord");
         notselected(anchmed, lmed, pmed, "Fournisseurs");
-        openPage("../GUI/PointDeVente.fxml");
+        //openPage("../GUI/PointDeVente.fxml");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PointDeVente.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+
+
+        Scene scene = new Scene(root, 320, 240);
+        stage.setTitle("Manage Pt de vente");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -194,7 +235,17 @@ public class MenuLoaderController implements Initializable {
         try {
             Platform.runLater(() -> mainpan.getChildren().clear());
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Stage stage = new Stage();
+            Parent root = loader.load();
+
+
+
+            Scene scene = new Scene(root, 320, 240);
+            stage.setTitle("Login");
+            stage.setScene(scene);
+            stage.show();
+            /*
             Parent root = loader.load();
             Stage stage = new Stage();
             Scene scene = new Scene(root);
@@ -206,7 +257,7 @@ public class MenuLoaderController implements Initializable {
             stage.show();
             javafx.geometry.Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
             stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);*/
             Stage s = (Stage) mainanch.getScene().getWindow();
             s.close();
 
@@ -226,7 +277,18 @@ public class MenuLoaderController implements Initializable {
         notselected(anchnot, lnot, pnot, "Produits");
         notselected(anchmed, lmed, pmed, "Fournisseurs");
         notselected(anchset, lset, pset, "Point de ventes");
-        openPage("../GUI/DashBord.fxml");
+        //openPage("../GUI/DashBord.fxml");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashBord.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+
+
+        Scene scene = new Scene(root, 320, 240);
+        stage.setTitle("Manage Products");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void selected(AnchorPane anch, Label lbl, Pane pane, String txt) {
@@ -409,7 +471,7 @@ public class MenuLoaderController implements Initializable {
             }
         });
         dashclick = true;
-        openPage("../GUI/DashBord.fxml");
+        //openPage("../GUI/DashBord.fxml");
 
 
     }

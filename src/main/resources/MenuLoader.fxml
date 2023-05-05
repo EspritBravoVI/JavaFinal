@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="mainanch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1850.0" xmlns="http://javafx.com/javafx/20.0.1-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuLoaderController">
+    <children>
+      <BorderPane fx:id="mainpan" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="anchside" prefHeight="1000.0" prefWidth="294.0" style="-fx-background-color: #2ECC71;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1450.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="2.0" layoutY="14.0" prefHeight="57.0" prefWidth="291.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+               <children>
+                  <Label fx:id="mp" contentDisplay="CENTER" layoutX="-3.0" layoutY="-7.0" prefHeight="57.0" prefWidth="291.0" text=" Main Menu" textFill="#79807d" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="Segoe UI Bold" size="44.0" />
+                     </font>
+                  </Label>
+               </children>
+               <effect>
+                  <Blend />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane fx:id="anchnot" layoutY="231.0" onMouseClicked="#openProduct" prefHeight="58.0" prefWidth="291.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="231.0">
+               <children>
+                  <Label fx:id="lnot" layoutX="16.0" prefHeight="58.0" prefWidth="368.0" text="Produits" textFill="#79807d" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="Segoe UI" size="38.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="pnot" prefHeight="3.0" prefWidth="291.0" style="-fx-background-color: #79807d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+               <effect>
+                  <Blend />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane fx:id="anchmed" layoutY="431.0" onMouseClicked="#openFournisseur" prefHeight="57.0" prefWidth="291.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="431.0">
+               <children>
+                  <Label fx:id="lmed" layoutX="14.0" prefHeight="57.0" prefWidth="368.0" text="Fournisseurs" textFill="#79807d" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="Segoe UI" size="38.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="pmed" prefHeight="3.0" prefWidth="292.0" style="-fx-background-color: #79807d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+               <effect>
+                  <Blend />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane fx:id="anchset" layoutY="537.0" onMouseClicked="#openPointDeVente" prefHeight="50.0" prefWidth="291.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="537.0">
+               <children>
+                  <Label fx:id="lset" layoutX="16.0" layoutY="-11.0" prefHeight="50.0" prefWidth="368.0" text="Point de ventes" textFill="#79807d" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="-11.0">
+                     <font>
+                        <Font name="Segoe UI" size="38.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="pset" layoutY="66.0" prefHeight="3.0" prefWidth="291.0" style="-fx-background-color: #79807d;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+               <effect>
+                  <Blend />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane fx:id="anchex" layoutY="766.0" onMouseClicked="#openlogout" prefHeight="58.0" prefWidth="291.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label fx:id="lex" contentDisplay="RIGHT" graphicTextGap="3.0" layoutX="200.0" prefHeight="70.0" prefWidth="170.0" text="Se déconnecter " textFill="#79807d" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="Segoe UI" size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+               <effect>
+                  <Blend />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane fx:id="anchdash" layoutY="309.0" onMouseClicked="#openTableauDeBord" prefHeight="109.0" prefWidth="400.0">
+               <children>
+                  <Pane fx:id="pdash" layoutY="66.0" prefHeight="3.0" prefWidth="400.0" style="-fx-background-color: #79807d;" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Label fx:id="ldash" layoutX="14.0" prefHeight="84.0" prefWidth="380.0" text="Tableau de bord" textFill="#79807d">
+                     <font>
+                        <Font name="Segoe UI" size="38.0" />
+                     </font>
+                  </Label>
+               </children>
+               <effect>
+                  <Blend />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+         </children>
+         <effect>
+            <DropShadow height="20.0" radius="10.75" width="25.0" />
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>
